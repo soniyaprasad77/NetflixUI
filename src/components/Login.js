@@ -1,7 +1,12 @@
 import React, { useRef } from "react";
 import { useState } from "react";
 import Header from "./Header";
-import  formValidation  from "../utils/formValidation";
+import formValidation from "../utils/formValidation";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [errMessage, setErrorMessage] = useState(null);
@@ -19,6 +24,46 @@ const Login = () => {
     }
     setErrorMessage(null);
     console.log(emailValue, passwordValue, nameValue);
+    if (errorMessage) return;
+    //signup signin logic
+    if (!isSignedIn) {
+      //signup
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " - " + errorMessage);
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setErrorMessage(errorCode + " - " + errorMessage);
+        });
+    }
   };
   return (
     <div className="">
