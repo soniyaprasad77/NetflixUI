@@ -29,7 +29,7 @@ const Login = () => {
       return;
     }
     setErrorMessage(null);
-    console.log(emailValue, passwordValue, nameValue);
+ //    console.log(emailValue, passwordValue, nameValue);
     if (errorMessage) return;
     //signup signin logic
     if (!isSignedIn) {
@@ -49,6 +49,7 @@ const Login = () => {
           })
             .then(() => {
               // Profile updated!
+              console.log(auth.currentUser)
               dispatch(
                 addUser({
                   email: auth.currentUser.email,
@@ -83,6 +84,14 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
+          dispatch(
+            addUser({
+              email: auth.currentUser.email,
+              displayName: auth.currentUser.displayName,
+              id: auth.currentUser.uid,
+              photoURL: auth.currentUser.photoURL,
+            })
+          );
           const user = userCredential.user;
           console.log(user);
           navigate("/browse");
@@ -152,7 +161,7 @@ const Login = () => {
           {isSignedIn ? (
             <>
               New to Netflix?{" "}
-              <span className=" cursor-pointer  font-bold">Sign up now.</span>
+              <span className=" cursor-pointer  font-bold">Sign up now</span>
             </>
           ) : (
             <>
