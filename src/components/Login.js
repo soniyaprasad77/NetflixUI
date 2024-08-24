@@ -6,13 +6,19 @@ import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../store/userSlice";
+import { useDispatch } from "react-redux";
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [errMessage, setErrorMessage] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleButtonClick = (e) => {
     const emailValue = email.current.value;
     const passwordValue = password.current.value;
@@ -37,6 +43,30 @@ const Login = () => {
           // Signed up
           const user = userCredential.user;
           console.log(user);
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/63783532?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              dispatch(
+                addUser({
+                  email: auth.currentUser.email,
+                  displayName: auth.currentUser.displayName,
+                  id: auth.currentUser.uid,
+                  photoURL: auth.currentUser.photoURL,
+                })
+              );
+              navigate("/browse");
+
+              // ...
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setErrorMessage(error);
+            });
+
           // ...
         })
         .catch((error) => {
@@ -55,6 +85,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -66,7 +97,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="">
+    <div className="relative  w-full h-screen">
       <Header />
       <div className="absolute">
         <img
