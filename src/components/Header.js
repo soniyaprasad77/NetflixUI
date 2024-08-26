@@ -1,12 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, removeUser } from "../store/userSlice";
+import { onAuthStateChanged } from "firebase/auth";
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   console.log(user);
+  useEffect(() => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        console.log(firebaseUser);
+        // const uid = user.uid;
+        dispatch(
+          addUser({
+            email: firebaseUser.email,
+            displayName: firebaseUser.displayName,
+            id: firebaseUser.uid,
+            photoURL: firebaseUser.photoURL,
+          })
+        );
+        navigate("/browse");
+
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+  }, []);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -26,7 +53,7 @@ const Header = () => {
         alt="Netflix Logo"
       />
 
-      {user && (
+      {user.email && (
         <div className="flex justify-between items-center gap-4">
           <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
           <button

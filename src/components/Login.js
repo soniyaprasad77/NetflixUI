@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { addUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleButtonClick = (e) => {
     const emailValue = email.current.value;
@@ -29,7 +29,7 @@ const Login = () => {
       return;
     }
     setErrorMessage(null);
- //    console.log(emailValue, passwordValue, nameValue);
+    //    console.log(emailValue, passwordValue, nameValue);
     if (errorMessage) return;
     //signup signin logic
     if (!isSignedIn) {
@@ -49,7 +49,6 @@ const Login = () => {
           })
             .then(() => {
               // Profile updated!
-              console.log(auth.currentUser)
               dispatch(
                 addUser({
                   email: auth.currentUser.email,
@@ -58,7 +57,7 @@ const Login = () => {
                   photoURL: auth.currentUser.photoURL,
                 })
               );
-              navigate("/browse");
+              console.log(auth.currentUser);
 
               // ...
             })
@@ -84,6 +83,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
+          console.log(auth.currentUser);
           dispatch(
             addUser({
               email: auth.currentUser.email,
@@ -94,7 +94,7 @@ const Login = () => {
           );
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
+          // navigate("/browse");
           // ...
         })
         .catch((error) => {
