@@ -11,6 +11,7 @@ import {
 //import { useNavigate } from "react-router-dom";
 import { addUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
+import { USER_AVTAR } from "../utils/constants";
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [errMessage, setErrorMessage] = useState(null);
@@ -45,7 +46,7 @@ const Login = () => {
           console.log(user);
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/63783532?v=4",
+            photoURL: USER_AVTAR,
           })
             .then(() => {
               // Profile updated!
