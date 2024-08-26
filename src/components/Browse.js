@@ -1,12 +1,14 @@
-import React from 'react'
-import Header from './Header'
+import React from "react";
+import Header from "./Header";
+import useNowPlayingMoviesCallApi from "../hooks/useNowPlayingMoviesCallApi";
+
 const Browse = () => {
+  useNowPlayingMoviesCallApi();
   return (
     <div>
-      <Header/>
-      Browse
+      <Header />
     </div>
-  )
-}
+  );
+};
 
-export default Browse
+export default Browse;

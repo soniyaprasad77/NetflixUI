@@ -30,7 +30,7 @@ const Login = () => {
       return;
     }
     setErrorMessage(null);
-    //    console.log(emailValue, passwordValue, nameValue);
+    //    //console.log(emailValue, passwordValue, nameValue);
     if (errorMessage) return;
     //signup signin logic
     if (!isSignedIn) {
@@ -43,7 +43,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log(user);
+          //console.log(user);
           updateProfile(auth.currentUser, {
             displayName: name.current.value,
             photoURL: USER_AVTAR,
@@ -58,7 +58,7 @@ const Login = () => {
                   photoURL: auth.currentUser.photoURL,
                 })
               );
-              console.log(auth.currentUser);
+              //console.log(auth.currentUser);
 
               // ...
             })
@@ -84,7 +84,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          console.log(auth.currentUser);
+          //console.log(auth.currentUser);
           dispatch(
             addUser({
               email: auth.currentUser.email,
@@ -94,7 +94,7 @@ const Login = () => {
             })
           );
           const user = userCredential.user;
-          console.log(user);
+          //console.log(user);
           // navigate("/browse");
           // ...
         })

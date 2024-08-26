@@ -11,12 +11,12 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-  console.log(user);
+  //console.log(user);
   useEffect(() => {
     const unsubscribe = () => {
       onAuthStateChanged(auth, (firebaseUser) => {
         if (firebaseUser) {
-          console.log(firebaseUser);
+          //console.log(firebaseUser);
           // const uid = user.uid;
           dispatch(
             addUser({
@@ -52,11 +52,7 @@ const Header = () => {
   };
   return (
     <div className="w-full absolute  z-10 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
-      <img
-        className="w-44"
-        src={LOGO}
-        alt="Netflix Logo"
-      />
+      <img className="w-44" src={LOGO} alt="Netflix Logo" />
 
       {user.email && (
         <div className="flex justify-between items-center gap-4">
