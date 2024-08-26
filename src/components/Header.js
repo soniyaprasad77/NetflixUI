@@ -11,28 +11,31 @@ const Header = () => {
   const user = useSelector((store) => store.user);
   console.log(user);
   useEffect(() => {
-    onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser) {
-        console.log(firebaseUser);
-        // const uid = user.uid;
-        dispatch(
-          addUser({
-            email: firebaseUser.email,
-            displayName: firebaseUser.displayName,
-            id: firebaseUser.uid,
-            photoURL: firebaseUser.photoURL,
-          })
-        );
-        navigate("/browse");
+    const unsubscribe = () => {
+      onAuthStateChanged(auth, (firebaseUser) => {
+        if (firebaseUser) {
+          console.log(firebaseUser);
+          // const uid = user.uid;
+          dispatch(
+            addUser({
+              email: firebaseUser.email,
+              displayName: firebaseUser.displayName,
+              id: firebaseUser.uid,
+              photoURL: firebaseUser.photoURL,
+            })
+          );
+          navigate("/browse");
 
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        dispatch(removeUser());
-        navigate("/");
-      }
-    });
+          // ...
+        } else {
+          // User is signed out
+          // ...
+          dispatch(removeUser());
+          navigate("/");
+        }
+      });
+    };
+    return () => unsubscribe();
   }, []);
   const handleSignOut = () => {
     signOut(auth)
