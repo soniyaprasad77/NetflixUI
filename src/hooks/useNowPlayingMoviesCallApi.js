@@ -8,7 +8,7 @@ const useNowPlayingMoviesCallApi = () => {
   useEffect(() => {
     const getNowPlayingMovies = async () => {
       const data = await fetch(
-        "https://api.themoviedb.org/3/movie/now_playing?page=1",
+        "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
         API_OPTIONS
       );
       const jsonData = await data.json();
