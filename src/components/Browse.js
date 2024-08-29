@@ -6,7 +6,7 @@ import MainContainer from "./MainContainer";
 const Browse = () => {
   useNowPlayingMoviesCallApi();
   return (
-    <div>
+    <div className='relative'>
       <Header />
       <MainContainer />
     </div>

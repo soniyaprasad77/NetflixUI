@@ -12,17 +12,16 @@ const MainContainer = () => {
   const { original_title, overview, id } = mainMovie;
 
   return (
-    <div>
-      <div className="relative">
-        <VideoTitle title={original_title} overview={overview} />
-        <VideoBackground movieId={id} />
+    <div className='absolute top-0 left-0'>
+      <div className='relative'>
+        <div className='absolute inset-0 z-0'>
+          <VideoBackground movieId={id} />
+        </div>
+        <div className='relative z-10'>
+          <VideoTitle title={original_title} overview={overview} />
+        </div>
       </div>
-      {/* Add padding to push the SecondaryContainer down */}
-      <div className="">
-        {" "}
-        {/* 60% padding corresponds to 16:9 aspect ratio */}
-        <SecondaryContainer />
-      </div>
+      <SecondaryContainer />
     </div>
   );
 };
