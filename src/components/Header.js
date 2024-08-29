@@ -51,7 +51,7 @@ const Header = () => {
       });
   };
   return (
-    <div className="w-full absolute  z-10 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
+    <div className="w-full absolute  z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
       <img className="w-44" src={LOGO} alt="Netflix Logo" />
 
       {user.email && (
