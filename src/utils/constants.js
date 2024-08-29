@@ -7,6 +7,6 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: process.env.token,
+    Authorization: process.env.REACT_APP_TOKEN,
   },
 };
