@@ -6,7 +6,7 @@ const MovieCard = ({ image_path }) => {
     <div className='w-48 cursor-pointer'>
       <img
         src={CDN_IMG_URL + image_path}
-        className='rounded-lg'
+        className='w-48 rounded-lg'
         alt='movie card'
       ></img>
     </div>
