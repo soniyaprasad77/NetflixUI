@@ -6,6 +6,7 @@ import SecondaryContainer from "./SecondaryContainer";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies.nowPlayingMovies);
+
   if (!movies) return null;
 
   const mainMovie = movies[0];

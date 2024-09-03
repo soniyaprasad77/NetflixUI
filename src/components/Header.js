@@ -1,11 +1,11 @@
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect } from "react";
-import { signOut } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../store/userSlice";
-import { onAuthStateChanged } from "firebase/auth";
+
 import { LOGO } from "../utils/constants";
+import { auth } from "../utils/firebase";
 
 const Header = () => {
   const navigate = useNavigate();
