@@ -51,16 +51,22 @@ const Header = () => {
         navigate("/error");
       });
   };
-
+  const handleGPTSearchClick = () => {};
   return (
-    <div className='w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between'>
-      <img className='w-44' src={LOGO} alt='Netflix Logo' />
+    <div className="w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
+      <img className="w-44" src={LOGO} alt="Netflix Logo" />
       {user.email && (
-        <div className='flex justify-between items-center gap-4'>
-          <img className='w-12 h-12' src={user?.photoURL} alt='user icon' />
+        <div className="flex justify-between items-center gap-4">
+          <button
+            onClick={handleGPTSearchClick}
+            className="bg-purple-400 text-white rounded-lg px-4 py-2 mx-4 my-2"
+          >
+            Search
+          </button>
+          <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
           <button
             onClick={handleSignOut}
-            className=' font-bold bg-red-600 rounded-full p-2 text-white'
+            className=" font-bold bg-red-800 rounded-lg p-2 text-white"
           >
             {" "}
             Sign Out
