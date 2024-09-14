@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../store/userSlice";
-import {toggleGPTSearchView}  from "../store/gptSlice"
+import { toggleGPTSearchView } from "../store/gptSlice";
 
 import { LOGO } from "../utils/constants";
 import { auth } from "../utils/firebase";
@@ -53,7 +53,7 @@ const Header = () => {
       });
   };
   const handleGPTSearchClick = () => {
-    dispatch(toggleGPTSearchView())
+    dispatch(toggleGPTSearchView());
   };
   return (
     <div className="w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
@@ -64,7 +64,7 @@ const Header = () => {
             onClick={handleGPTSearchClick}
             className="bg-purple-400 text-white rounded-lg px-4 py-2 mx-4 my-2"
           >
-            Search
+            GPTSearch
           </button>
           <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
           <button
