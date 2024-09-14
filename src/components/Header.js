@@ -7,11 +7,13 @@ import { toggleGPTSearchView } from "../store/gptSlice";
 
 import { LOGO } from "../utils/constants";
 import { auth } from "../utils/firebase";
+import GPTSearch from "./GPTSearch";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const isGPTSearchTrue = useSelector((store) => store.gpt.showGPTSearch);
   //console.log(user);
   useEffect(() => {
     const unsubscribe = () => {
@@ -64,7 +66,7 @@ const Header = () => {
             onClick={handleGPTSearchClick}
             className="bg-purple-400 text-white rounded-lg px-4 py-2 mx-4 my-2"
           >
-            GPTSearch
+            {isGPTSearchTrue ? <span> GPTSearch </span> : <span>Home</span>}
           </button>
           <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
           <button
