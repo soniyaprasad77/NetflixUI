@@ -61,17 +61,17 @@ const Header = () => {
     <div className="w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
       <img className="w-44" src={LOGO} alt="Netflix Logo" />
       {user.email && (
-        <div className="flex justify-between items-center gap-4">
+        <div className="flex justify-between items-center">
           <button
             onClick={handleGPTSearchClick}
-            className="bg-purple-400 text-white rounded-lg px-4 py-2 mx-4 my-2"
+            className="bg-purple-400 text-white rounded-lg px-4 py-2 my-2 mr-4"
           >
             {isGPTSearchTrue ? <span> GPTSearch </span> : <span>Home</span>}
           </button>
           <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
           <button
             onClick={handleSignOut}
-            className=" font-bold rounded-lg p-2 text-white"
+            className=" font-bold rounded-lg text-white"
           >
             {" ( "}
             Sign Out
