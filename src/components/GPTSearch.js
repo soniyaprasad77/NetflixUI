@@ -7,7 +7,7 @@ const GPTSearch = () => {
       <div className="absolute">
         <img className="" src={BG_URL} alt="logo" />
       </div>
-      <div className="">
+      <div className="absolute w-full">
         <GPTSearchBar />
       </div>
     </>
