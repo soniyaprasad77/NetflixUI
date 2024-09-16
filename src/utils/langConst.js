@@ -12,3 +12,5 @@ const lang = {
     searchPlaceholder: "¿Qué te gustaría ver hoy?",
   },
 };
+
+export default lang;
