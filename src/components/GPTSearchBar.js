@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const GPTSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.language.language);
   //console.log(selectedLanguage);
-  console.log(langConst.en);
+ // console.log(langConst.en);
 
   return (
     <div>

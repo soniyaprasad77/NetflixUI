@@ -65,19 +65,21 @@ const Header = () => {
       <img className="w-44" src={LOGO} alt="Netflix Logo" />
       {user.email && (
         <div className="flex justify-between items-center gap-4">
-          <select
-            onClick={handleLanguageChange}
-            className="p-2 bg-slate-600 text-white"
-          >
-            {SUPPORTED_LANGUAGES.map((lang) => {
-              console.log(lang.identifier);
-              return (
-                <option key={lang.identifier} value={lang.identifier}>
-                  {lang.name}
-                </option>
-              );
-            })}
-          </select>
+          {!isGPTSearchTrue && (
+            <select
+              onClick={handleLanguageChange}
+              className="p-2 bg-slate-600 text-white"
+            >
+              {SUPPORTED_LANGUAGES.map((lang) => {
+                //console.log(lang.identifier);
+                return (
+                  <option key={lang.identifier} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                );
+              })}
+            </select>
+          )}
           <button
             onClick={handleGPTSearchClick}
             className="bg-purple-400 text-white rounded-lg px-4 py-2 my-2 mr-4"
