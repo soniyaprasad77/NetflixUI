@@ -9,6 +9,7 @@ const gptSlice = createSlice({
     toggleGPTSearchView: (state, action) => {
       state.showGPTSearch = !state.showGPTSearch;
     },
+    
   },
 });
 
