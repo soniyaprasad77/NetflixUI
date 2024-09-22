@@ -1,11 +1,15 @@
 import React, { useRef, useState } from "react";
 import langConst from "../utils/langConst";
 import { useSelector } from "react-redux";
-import openai from "../utils/openai";
+import { GEMINI_KEY } from "../utils/constants";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+const genAI = new GoogleGenerativeAI(GEMINI_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 const GPTSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.language.language);
   const gptSearch = useRef(null);
+  const [movies, setMovies] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null); // To track errors
   const [loading, setLoading] = useState(false); // To track loading state
 
@@ -13,31 +17,17 @@ const GPTSearchBar = () => {
     setErrorMessage(null); // Reset any previous error messages
     setLoading(true); // Set loading state when fetching data
     // setMovies(""); // Clear previous results
-
     const gptPrompt = `You are the world's best movie recommendation system. 
       Suggest 5 movies based on the query: "${gptSearch.current.value}".
       Return the result as a comma-separated list, like: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya.`;
 
     try {
-      const gptResults = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: gptPrompt }],
-      });
+      const prompt = gptPrompt;
 
-      if (!gptResults.choices) {
-        throw new Error("No results found");
-      }
-
-      // Handle successful response
-      //  setMovies(gptResults.choices[0]?.message?.content);
+      const result = await model.generateContent(prompt);
+      console.log(result.response.text());
+      setMovies(result.response.text());
     } catch (error) {
-      if (error.response?.status === 429) {
-        setErrorMessage("You've exceeded your quota. Please try again later.");
-      } else if (error.response?.status === 404) {
-        setErrorMessage("The requested model could not be found.");
-      } else {
-        setErrorMessage("An unexpected error occurred. Please try again.");
-      }
       console.error("Error:", error);
     } finally {
       setLoading(false); // Reset loading state after request
@@ -63,15 +53,17 @@ const GPTSearchBar = () => {
             {loading ? "Loading..." : langConst[selectedLanguage]?.search}
           </button>
         </div>
+      </form>
+      <div className="mt-4 bg-black w-1/2 mx-auto">
         {errorMessage && (
           <div className="text-red-500 mt-4">{errorMessage}</div>
         )}
-        {/* {movies && ( */}
-        {/* <div className="text-white mt-4"> */}
-        {/* Recommended Movies: {movies} */}
-        {/* </div> */}
-        {/* )} */}
-      </form>
+        {movies && (
+          <div className="text-white mt-4 z-10 text-xl bg-black">
+            Recommended Movies: {movies}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
