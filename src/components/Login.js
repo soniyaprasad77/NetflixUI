@@ -111,7 +111,7 @@ const Login = () => {
     <div className="relative  w-full h-screen">
       <Header />
       <div className="absolute">
-        <img src={BG_URL} alt="Netflix background" />
+        <img src={BG_URL} alt=" background" />
       </div>
       <div className="absolute right-0 left-0 w-4/12 mx-auto my-16 bg-black opacity-80 pb-16 pt-6 px-8 m-2 text-white rounded-md">
         <h1 className="text-2xl px-4 pt-2 pb-6 font-bold">
@@ -159,7 +159,7 @@ const Login = () => {
         >
           {isSignedIn ? (
             <>
-              New to Netflix?{" "}
+              New here?{" "}
               <span className=" cursor-pointer  font-bold">Sign up now</span>
             </>
           ) : (

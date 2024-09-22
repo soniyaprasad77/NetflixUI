@@ -62,7 +62,7 @@ const Header = () => {
   };
   return (
     <div className="w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
-      <img className="w-44" src={LOGO} alt="Netflix Logo" />
+      <img className="w-44" src={LOGO} alt=" Logo" />
       {user.email && (
         <div className="flex justify-between items-center gap-4">
           {!isGPTSearchTrue && (
