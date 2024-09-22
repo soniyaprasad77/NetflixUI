@@ -1,10 +1,10 @@
-# NetflixGPT
+# Blockbuster
 
-NetflixGPT is a project that leverages the power of ChatGPT to suggest movies and series to users. 
+Blockbuster is a project that leverages the power of ChatGPT to suggest movies and series to users. 
 
 ## Features
 
-- Chat with NetflixGPT to get personalized movie and series recommendations.
+- Chat with Blockbuster to get personalized movie and series recommendations.
 - Explore a wide range of genres and categories.
 - Get detailed information about movies and series, including ratings, cast, and plot summaries.
 
@@ -13,7 +13,7 @@ NetflixGPT is a project that leverages the power of ChatGPT to suggest movies an
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/netflix-gpt.git
+    git clone https://github.com/your-username/movie-recommender.git
     ```
 
 2. Install the required dependencies:
@@ -32,11 +32,11 @@ NetflixGPT is a project that leverages the power of ChatGPT to suggest movies an
 
 2. Open your web browser and navigate to `http://localhost:3000`.
 
-3. Start chatting with NetflixGPT and enjoy personalized recommendations!
+3. Start searching with blockbuster and enjoy personalized recommendations!
 
 ## Contributing
 
-Contributions are welcome! If you'd like to contribute to NetflixGPT, please follow these steps:
+Contributions are welcome! If you'd like to contribute to blockbuster, please follow these steps:
 
 1. Fork the repository.
 
