@@ -82,9 +82,9 @@ const Header = () => {
           )}
           <button
             onClick={handleGPTSearchClick}
-            className="bg-purple-400 text-white rounded-lg px-4 py-2 my-2 mr-4"
+            className="bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg px-4 py-2 my-2 mr-4"
           >
-            {isGPTSearchTrue ? <span> GPTSearch </span> : <span>Home</span>}
+            {isGPTSearchTrue ? <span> Search </span> : <span>Home</span>}
           </button>
           <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
           <button

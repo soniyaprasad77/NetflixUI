@@ -5,7 +5,12 @@ const GPTSearch = () => {
   return (
     <>
       <div className="absolute">
-        <img className="" src={BG_URL} alt="logo" />
+        <img
+          className=""
+          style={{ filter: "brightness(50%)" }}
+          src={BG_URL}
+          alt="logo"
+        />
       </div>
       <div className="absolute w-full">
         <GPTSearchBar />

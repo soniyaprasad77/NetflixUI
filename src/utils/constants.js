@@ -1,3 +1,4 @@
+import bg_image from "../assets/images/backgroundImage.webp";
 export const LOGO =
   "https://businessmodelnavigator.com/img/case-firms-logos/18.png";
 export const FOOTER_LOGO =
@@ -13,7 +14,7 @@ export const API_OPTIONS = {
 };
 
 export const CDN_IMG_URL = "https://image.tmdb.org/t/p/w500/";
-export const BG_URL = "";
+export const BG_URL = bg_image;
 
 export const SUPPORTED_LANGUAGES = [
   { identifier: "en", name: "English" },
