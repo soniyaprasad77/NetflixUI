@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import langConst from "../utils/langConst";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS, GEMINI_KEY } from "../utils/constants";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { addGeminiSuggestedMovies } from "../store/geminiSlice";
+
 const genAI = new GoogleGenerativeAI(GEMINI_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -10,41 +12,59 @@ const GeminiSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.language.language);
   const geminiSearch = useRef(null);
   const [movies, setMovies] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null); // To track errors
-  const [loading, setLoading] = useState(false); // To track loading state
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSearchButton = async () => {
-    setErrorMessage(null); // Reset any previous error messages
-    setLoading(true); // Set loading state when fetching data
+    setErrorMessage(null);
+    setLoading(true);
 
     try {
       const geminiPrompt = `You are the world's best movie recommendation system. 
-      Suggest 5 movies based on the query: "${geminiSearch.current.value}".
+      Suggest 5 movies based on the query: "${geminiSearch.current.value}". 
       Return the result as a comma-separated list, like: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya.`;
 
       const result = await model.generateContent(geminiPrompt);
-      const geminiSuggestedMovies = result.response.text().split(",");
 
-      // Function to fetch movie details from themoviedb
-      const fetchMovies = (movie) => {
-        return fetch(
-          `https://api.themoviedb.org/3/search/movie?query=${movie.trim()}&include_adult=false&language=en-US&page=1`,
+      if (!result || !result.response) {
+        throw new Error("Failed to get response from Gemini AI.");
+      }
+
+      const geminiSuggestedMovies = result.response.text().split(",").map((movie) => movie.trim());
+
+      // Function to fetch movie details from TMDb
+      const fetchMovies = async (movie) => {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+            movie
+          )}&include_adult=false&language=en-US&page=1`,
           API_OPTIONS
-        ).then((response) => response.json()); // return the fetch request
+        );
+        if (!response.ok) {
+          throw new Error(`Failed to fetch details for movie: ${movie}`);
+        }
+        return await response.json();
       };
 
       // Map through suggested movies and fetch details
-      const movieDetails = geminiSuggestedMovies.map((movie) =>
+      const movieDetailsPromises = geminiSuggestedMovies.map((movie) =>
         fetchMovies(movie)
       );
 
       // Resolve all promises
-      const promisedArr = await Promise.all(movieDetails);
-      console.log(promisedArr);
+      const promisedArr = await Promise.all(movieDetailsPromises);
 
-      // Extract movie titles or other details you need from the response
-      const movieTitles = promisedArr.map(
-        (data) => data.results[0]?.title || "Movie not found"
+      dispatch(
+        addGeminiSuggestedMovies({
+          geminiSearchedMovies: geminiSuggestedMovies,
+          TMDBsearchedMovies: promisedArr,
+        })
+      );
+
+      // Extract movie titles or fallback if not found
+      const movieTitles = promisedArr.map((data) =>
+        data.results.length ? data.results[0].title : "Movie not found"
       );
 
       // Set movies in the state
@@ -61,9 +81,7 @@ const GeminiSearchBar = () => {
     <div>
       <form
         className="bg-black my-24 mx-auto w-1/2 border-black"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
+        onSubmit={(e) => e.preventDefault()}
       >
         <div className="flex my-4">
           <input
