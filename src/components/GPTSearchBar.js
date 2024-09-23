@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import langConst from "../utils/langConst";
 import { useSelector } from "react-redux";
-import { GEMINI_KEY } from "../utils/constants";
+import { API_OPTIONS, GEMINI_KEY } from "../utils/constants";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(GEMINI_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -23,10 +23,18 @@ const GPTSearchBar = () => {
 
     try {
       const prompt = gptPrompt;
-
       const result = await model.generateContent(prompt);
-      console.log(result.response.text());
-      setMovies(result.response.text());
+      const geminiSuggestedMovies = result.response.text().split(",");
+      setMovies(geminiSuggestedMovies);
+      const fetchMovies = (movie) => {
+        fetch(
+          "https://api.themoviedb.org/3/search/movie?query=" +
+            movie +
+            "&include_adult=false&language=en-US&page=1",
+          API_OPTIONS
+        );
+      };
+      geminiSuggestedMovies.map((movie) => fetchMovies(movie));
     } catch (error) {
       console.error("Error:", error);
     } finally {
