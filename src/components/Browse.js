@@ -3,13 +3,13 @@ import usePopularMovies from "../hooks/usePopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import { useSelector } from "react-redux";
-import GPTSearch from "./GPTSearch";
+import GeminiSearchPage from "./GeminiSearchPage";
 // Components
 import Header from "./Header";
 import MainContainer from "./MainContainer";
 
 const Browse = () => {
-  const searchGPT = useSelector((store) => store.gpt.showGPTSearch);
+  const geminiSearch = useSelector((store) => store.gemini.showGeminiSearch);
 
   useNowPlayingMoviesCallApi();
   usePopularMovies();
@@ -19,7 +19,7 @@ const Browse = () => {
   return (
     <div className="relative">
       <Header />
-      {searchGPT ? <MainContainer /> : <GPTSearch />}
+      {geminiSearch ? <MainContainer /> : <GeminiSearchPage />}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { BG_URL } from "../utils/constants";
-import GPTSearchBar from "./GPTSearchBar";
+import GeminiSearchBar from "./GeminiSearchBar";
 
-const GPTSearch = () => {
+const GeminiSearchPage = () => {
   return (
     <>
       <div className="absolute">
@@ -13,9 +13,9 @@ const GPTSearch = () => {
         />
       </div>
       <div className="absolute w-full">
-        <GPTSearchBar />
+        <GeminiSearchBar />
       </div>
     </>
   );
 };
-export default GPTSearch;
+export default GeminiSearchPage;

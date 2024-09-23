@@ -1,6 +1,6 @@
 # Blockbuster
 
-Blockbuster is a project that leverages the power of ChatGPT to suggest movies and series to users. 
+Blockbuster is a project that leverages the power of Gemini to suggest movies and series to users. 
 
 ## Features
 

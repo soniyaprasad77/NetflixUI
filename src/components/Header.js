@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../store/userSlice";
-import { toggleGPTSearchView } from "../store/gptSlice";
+import { toggleGeminiSearchView } from "../store/geminiSlice";
 import { SUPPORTED_LANGUAGES } from "../utils/constants";
 import { LOGO } from "../utils/constants";
 import { auth } from "../utils/firebase";
@@ -13,7 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-  const isGPTSearchTrue = useSelector((store) => store.gpt.showGPTSearch);
+  const isGeminiSearchTrue = useSelector((store) => store.gemini.showGeminiSearch);
   //console.log(user);
   useEffect(() => {
     const unsubscribe = () => {
@@ -54,8 +54,8 @@ const Header = () => {
         navigate("/error");
       });
   };
-  const handleGPTSearchClick = () => {
-    dispatch(toggleGPTSearchView());
+  const handleGeminiSearchClick = () => {
+    dispatch(toggleGeminiSearchView());
   };
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
@@ -65,7 +65,7 @@ const Header = () => {
       <img className="w-44" src={LOGO} alt=" Logo" />
       {user.email && (
         <div className="flex justify-between items-center gap-4">
-          {!isGPTSearchTrue && (
+          {!isGeminiSearchTrue && (
             <select
               onClick={handleLanguageChange}
               className="p-2 bg-slate-600 text-white"
@@ -81,10 +81,10 @@ const Header = () => {
             </select>
           )}
           <button
-            onClick={handleGPTSearchClick}
+            onClick={handleGeminiSearchClick}
             className="bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg px-4 py-2 my-2 mr-4"
           >
-            {isGPTSearchTrue ? <span> Search </span> : <span>Home</span>}
+            {isGeminiSearchTrue ? <span> Search </span> : <span>Home</span>}
           </button>
           <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
           <button
