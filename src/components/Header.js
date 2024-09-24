@@ -13,7 +13,9 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-  const isGeminiSearchTrue = useSelector((store) => store.gemini.showGeminiSearch);
+  const isGeminiSearchTrue = useSelector(
+    (store) => store.gemini.showGeminiSearch
+  );
   //console.log(user);
   useEffect(() => {
     const unsubscribe = () => {
@@ -29,14 +31,18 @@ const Header = () => {
               photoURL: firebaseUser.photoURL,
             })
           );
-          navigate("/browse");
+          if (firebaseUser) {
+            navigate("/browse");
+          }
 
-          // ...
+          // ...32ewsavf mnmb6y7
         } else {
           // User is signed out
           // ...
           dispatch(removeUser());
-          navigate("/");
+          if (!firebaseUser) {
+            navigate("/");
+          }
         }
       });
     };
