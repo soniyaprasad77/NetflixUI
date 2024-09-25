@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS, GEMINI_KEY } from "../utils/constants";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { addGeminiSuggestedMovies } from "../store/geminiSlice";
+import GeminiMovieSuggestions from "./GeminiMovieSuggestions";
 
 const genAI = new GoogleGenerativeAI(GEMINI_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -31,7 +32,10 @@ const GeminiSearchBar = () => {
         throw new Error("Failed to get response from Gemini AI.");
       }
 
-      const geminiSuggestedMovies = result.response.text().split(",").map((movie) => movie.trim());
+      const geminiSuggestedMovies = result.response
+        .text()
+        .split(",")
+        .map((movie) => movie.trim());
 
       // Function to fetch movie details from TMDb
       const fetchMovies = async (movie) => {
@@ -99,11 +103,12 @@ const GeminiSearchBar = () => {
         {errorMessage && (
           <div className="text-red-500 mt-4">{errorMessage}</div>
         )}
-        {movies && (
-          <div className="text-white mt-4 z-10 text-xl bg-black">
-            Recommended Movies: {movies}
-          </div>
-        )}
+      </div>
+      <div className="w-full bg-black bg-opacity-80 text-white">
+        <div className="text-white text-3xl flex justify-center font-mono ">
+          Recommendated Movies
+        </div>
+        {movies && <GeminiMovieSuggestions />}
       </div>
     </div>
   );

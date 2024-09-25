@@ -6,7 +6,7 @@ const GeminiSearchPage = () => {
     <>
       <div className="absolute">
         <img
-          className=""
+          className="fixed"
           style={{ filter: "brightness(50%)" }}
           src={BG_URL}
           alt="logo"

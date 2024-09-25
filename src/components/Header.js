@@ -31,18 +31,14 @@ const Header = () => {
               photoURL: firebaseUser.photoURL,
             })
           );
-          if (firebaseUser) {
             navigate("/browse");
-          }
 
           // ...32ewsavf mnmb6y7
         } else {
           // User is signed out
           // ...
           dispatch(removeUser());
-          if (!firebaseUser) {
             navigate("/");
-          }
         }
       });
     };
@@ -64,7 +60,6 @@ const Header = () => {
     dispatch(toggleGeminiSearchView());
   };
   const handleLanguageChange = (e) => {
-    dispatch(changeLanguage(e.target.value));
   };
   return (
     <div className="w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
