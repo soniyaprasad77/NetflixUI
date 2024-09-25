@@ -117,7 +117,7 @@ const Login = () => {
           alt=" background"
         />
       </div>
-      <div className="absolute right-0 left-0 w-4/12 mx-auto my-16 bg-black opacity-80 pb-16 pt-6 px-8 m-2 text-white rounded-md">
+      <div className="absolute right-0 left-0 w-4/12 mx-auto my-16 bg-[#0D3FA9] bg-opacity-50 pb-16 pt-6 px-8 m-2 text-white rounded-md">
         <h1 className="text-2xl px-4 pt-2 pb-6 font-bold">
           {isSignedIn ? <>Sign In</> : <>Sign Up</>}
         </h1>
@@ -133,7 +133,7 @@ const Login = () => {
                 ref={name}
                 type="text"
                 placeholder="Name"
-                className="w-full p-3 my-2  bg-slate-800 rounded-md"
+                className="w-full p-3 my-2  bg-[#0D3FA9] rounded-md"
               />
             </>
           )}
@@ -141,18 +141,18 @@ const Login = () => {
             ref={email}
             type="email"
             placeholder="Email"
-            className="w-full p-3 my-2  bg-slate-800 rounded-md"
+            className="w-full p-3 my-2  bg-[#0D3FA9] rounded-md"
           />
           <input
             ref={password}
             type="password"
             placeholder="Password"
-            className="w-full p-3 my-2  bg-slate-800 rounded-md"
+            className="w-full p-3 my-2  bg-[#0D3FA9] rounded-md"
           />
           <p className="text-red-500 text-sm">{errMessage}</p>
           <button
             onClick={handleButtonClick}
-            className="w-full p-2 my-4 bg-red-600 text-white rounded-md"
+            className="w-full p-2 my-4 bg-[#FFA900] text-white rounded-md"
           >
             {isSignedIn ? <>Sign In</> : <>Sign Up</>}
           </button>

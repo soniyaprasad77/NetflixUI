@@ -104,10 +104,12 @@ const GeminiSearchBar = () => {
           <div className="text-red-500 mt-4">{errorMessage}</div>
         )}
       </div>
-      <div className="w-full bg-black bg-opacity-80 text-white">
-        <div className="text-white text-3xl flex justify-center font-mono ">
-          Recommendated Movies
-        </div>
+      <div className="w-full bg-[#0D3FA9] text-[#FFA900] bg-opacity-80">
+        {movies && (
+          <div className="text-white text-3xl flex justify-center font-mono ">
+            Recommended Movies
+          </div>
+        )}
         {movies && <GeminiMovieSuggestions />}
       </div>
     </div>

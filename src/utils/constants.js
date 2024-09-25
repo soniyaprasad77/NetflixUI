@@ -4,7 +4,7 @@ export const LOGO =
 export const FOOTER_LOGO =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Blockbuster_logo.svg/640px-Blockbuster_logo.svg.png";
 export const USER_AVTAR =
-  "https://preview.redd.it/sgfxdosc4qo81.png?width=338&format=png&auto=webp&s=68081fe5673ff6ac567a531ae01a786ca80695f6";
+  "https://cdn-icons-png.flaticon.com/512/9385/9385289.png";
 export const API_OPTIONS = {
   method: "GET",
   headers: {
