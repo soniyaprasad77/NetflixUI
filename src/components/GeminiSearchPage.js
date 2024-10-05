@@ -6,7 +6,7 @@ const GeminiSearchPage = () => {
     <>
       <div className="absolute">
         <img
-          className="fixed"
+          className="fixed h-screen object-none sm:h-auto sm:fixed"
           style={{ filter: "brightness(50%)" }}
           src={BG_URL}
           alt="logo"

@@ -1,6 +1,8 @@
 import bg_image from "../assets/images/backgroundImage.webp";
-export const LOGO =
-  "https://businessmodelnavigator.com/img/case-firms-logos/18.png";
+import IMG_URL from "../assets/images/Blockbuster-Emblem.png";
+
+export const LOGO = IMG_URL;
+
 export const FOOTER_LOGO =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Blockbuster_logo.svg/640px-Blockbuster_logo.svg.png";
 export const USER_AVTAR =

@@ -64,13 +64,13 @@ const Header = () => {
   };
   return (
     <div className="w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between">
-      <img className="w-44" src={LOGO} alt=" Logo" />
+      <img className=" w-20 md:w-36 z-10" src={LOGO} alt=" Logo" />
       {user.email && (
         <div className="flex justify-between items-center gap-4">
           {!isGeminiSearchTrue && (
             <select
               onClick={handleLanguageChange}
-              className="p-2 bg-slate-600 text-white"
+              className="p-2 bg-slate-600 text-white hidden md:block"
             >
               {SUPPORTED_LANGUAGES.map((lang) => {
                 //console.log(lang.identifier);
@@ -84,18 +84,20 @@ const Header = () => {
           )}
           <button
             onClick={handleGeminiSearchClick}
-            className="bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg px-4 py-2 my-2 mr-4"
+            className="bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg text-xs md:text-lg px-3 py-1 md:px-4 md:py-2 md:my-2 md:mr-4"
           >
             {isGeminiSearchTrue ? <span> Search </span> : <span>Home</span>}
           </button>
-          <img className="w-12 h-12" src={user?.photoURL} alt="user icon" />
+          <img
+            className="w-12 h-12 hidden md:block"
+            src={user?.photoURL}
+            alt="user icon"
+          />
           <button
             onClick={handleSignOut}
-            className=" font-bold rounded-lg text-white"
+            className=" text-xs md:text-lg font-bold rounded-lg text-white whitespace-nowrap"
           >
-            {" ( "}
             Sign Out
-            {" ) "}
           </button>
         </div>
       )}

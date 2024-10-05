@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import langConst from "../utils/langConst";
 import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS, GEMINI_KEY } from "../utils/constants";
@@ -11,19 +11,21 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 const GeminiSearchBar = () => {
   const selectedLanguage = useSelector((store) => store.language.language);
-  const geminiSearch = useRef(null);
+  const [inputValue, setInputValue] = useState("");
   const [movies, setMovies] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
   const handleSearchButton = async () => {
+    if (inputValue.length === 0) {
+      return;
+    }
     setErrorMessage(null);
     setLoading(true);
 
     try {
       const geminiPrompt = `You are the world's best movie recommendation system. 
-      Suggest 5 movies based on the query: "${geminiSearch.current.value}". 
+      Suggest 5 movies based on the query: "${inputValue}". 
       Return the result as a comma-separated list, like: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya.`;
 
       const result = await model.generateContent(geminiPrompt);
@@ -84,17 +86,26 @@ const GeminiSearchBar = () => {
   return (
     <div>
       <form
-        className="bg-black my-24 mx-auto w-1/2 border-black"
+        className="my-24 w-full md:mx-auto md:w-1/2 border-black"
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className="flex my-4">
+        <div className="flex flex-col  md:flex-row my-4 md:gap-0 md:bg-black">
           <input
-            ref={geminiSearch}
             type="text"
             className="w-full p-4"
             placeholder={langConst[selectedLanguage]?.searchPlaceholder}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
           />
-          <button onClick={handleSearchButton} className="text-white px-8">
+          <button
+            onClick={handleSearchButton}
+            disabled={inputValue.length === 0}
+            className={`text-white bg-black px-4 py-2 rounded-full md:rounded-none mt-3 w-1/2 mx-auto md:mt-0 md:w-1/4 md:px-8 ${
+              inputValue.length === 0
+                ? "disabled:bg-[#cccccc] disabled:text-[#666666]"
+                : ""
+            }`}
+          >
             {loading ? "Loading..." : langConst[selectedLanguage]?.search}
           </button>
         </div>
@@ -106,7 +117,7 @@ const GeminiSearchBar = () => {
       </div>
       <div className="w-full bg-[#0D3FA9] text-[#FFA900] bg-opacity-80">
         {movies && (
-          <div className="text-white text-3xl flex justify-center font-mono ">
+          <div className="text-white text-2xl md:text-3xl flex md:justify-center font-mono ">
             Recommended Movies
           </div>
         )}
