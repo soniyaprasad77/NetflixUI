@@ -86,7 +86,7 @@ const Header = () => {
             onClick={handleGeminiSearchClick}
             className="bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg text-xs md:text-lg px-3 py-1 md:px-4 md:py-2 md:my-2 md:mr-4"
           >
-            {isGeminiSearchTrue ? <span> Search </span> : <span>Home</span>}
+            {!isGeminiSearchTrue ? <span>Home</span> : <span> Search </span>}
           </button>
           <img
             className="w-12 h-12 hidden md:block"

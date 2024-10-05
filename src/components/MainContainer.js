@@ -14,8 +14,8 @@ const MainContainer = () => {
 
   return (
     <div className="">
-      <div className="relative">
-        <div className="absolute inset-0 z-0">
+      <div className="relative pt-16 md:pt-0">
+        <div className="absolute inset-0 z-0 mt-16 md:mt-0">
           <VideoBackground movieId={id} />
         </div>
         <div className="relative z-10">

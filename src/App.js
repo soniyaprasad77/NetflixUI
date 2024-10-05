@@ -6,7 +6,7 @@ import appStore from "./store/appStore";
 function App() {
   return (
     <Provider store={appStore}>
-      <div className="App">
+      <div className=" bg-[#0D3FA9]">
         <Body />
       </div>
     </Provider>
