@@ -112,12 +112,13 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
+          className="h-screen object-none md:h-auto"
           style={{ filter: "brightness(50%)" }}
           src={BG_URL}
           alt=" background"
         />
       </div>
-      <div className="absolute right-0 left-0 w-4/12 mx-auto my-16 bg-[#0D3FA9] bg-opacity-50 pb-16 pt-6 px-8 m-2 text-white rounded-md">
+      <div className="w-full absolute right-0 left-0 md:w-4/12 mx-auto my-16 bg-[#0D3FA9] bg-opacity-50 pb-16 pt-6 px-8 m-2 text-white rounded-md">
         <h1 className="text-2xl px-4 pt-2 pb-6 font-bold">
           {isSignedIn ? <>Sign In</> : <>Sign Up</>}
         </h1>
