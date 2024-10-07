@@ -11,7 +11,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: process.env.REACT_APP_TOKEN,
+    Authorization: import.meta.env.VITE_TOKEN,
   },
 };
 
@@ -24,5 +24,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "spanish", name: "Spanish" },
 ];
 
-export const OPENAI_KEY = process.env.REACT_APP_OPENAI_API_KEY;
-export const GEMINI_KEY = process.env.REACT_APP_GEMINI_API_KEY;
+export const OPENAI_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+export const GEMINI_KEY = import.meta.env.VITE_GEMINI_API_KEY;

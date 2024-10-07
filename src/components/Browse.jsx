@@ -17,7 +17,7 @@ const Browse = () => {
   useUpcomingMovies();
 
   return (
-    <div className="relative">
+    <div className='relative'>
       <Header />
       {geminiSearch ? <MainContainer /> : <GeminiSearchPage />}
     </div>
