@@ -95,7 +95,7 @@ const Login = () => {
       <Header />
       <div className='absolute'>
         <img
-          className='h-screen object-none md:h-auto'
+          className='h-screen object-none xl:h-auto'
           style={{ filter: "brightness(50%)" }}
           src={BG_URL}
           alt=' background'
