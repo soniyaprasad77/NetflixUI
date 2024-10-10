@@ -8,10 +8,12 @@ import { SUPPORTED_LANGUAGES } from "../utils/constants";
 import { LOGO } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { changeLanguage } from "../store/langSlice";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const user = useSelector((store) => store.user);
 
@@ -30,7 +32,10 @@ const Header = () => {
             photoURL: firebaseUser.photoURL,
           })
         );
-        navigate("/browse");
+        if (location.pathname === "/") {
+          navigate("/browse");
+        }
+
       } else {
         dispatch(removeUser());
         navigate("/");

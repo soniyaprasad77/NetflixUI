@@ -4,6 +4,8 @@ import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
 import { useSelector } from "react-redux";
 import GeminiSearchPage from "./GeminiSearchPage";
+import { Outlet } from "react-router-dom"; // Import Outlet
+
 // Components
 import Header from "./Header";
 import MainContainer from "./MainContainer";
@@ -16,10 +18,17 @@ const Browse = () => {
   useTopRatedMovies();
   useUpcomingMovies();
 
+
   return (
     <div className='relative'>
       <Header />
-      {geminiSearch ? <MainContainer /> : <GeminiSearchPage />}
+      {location.pathname === "/browse" && (
+        <>
+          {geminiSearch ? <MainContainer /> : <GeminiSearchPage />}
+        </>
+      )}
+      <Outlet /> {/* This will render the nested routes */}
+
     </div>
   );
 };
