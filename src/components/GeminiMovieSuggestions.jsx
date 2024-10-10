@@ -5,8 +5,8 @@ const GeminiMovieSuggestions = () => {
   const { geminiSearchedMovies, TMDBsearchedMovies } = useSelector(
     (store) => store.gemini
   );
-  console.log(geminiSearchedMovies);
-  console.log(TMDBsearchedMovies);
+  // console.log(geminiSearchedMovies);
+  // console.log(TMDBsearchedMovies);
   return (
     <div>
       <div>

@@ -9,7 +9,7 @@ import MovieDetails from "./MovieDetails";
 
 const Body = () => {
   const movie = useSelector((store) => store.movies);
-  console.log(movie);
+  // console.log(movie);
 
   const appRouter = createBrowserRouter([
     {

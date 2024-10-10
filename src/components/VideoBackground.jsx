@@ -3,7 +3,6 @@ import useNowPlayingMoviesTrailer from "../hooks/useNowPlayingMoviesTrailer";
 
 const VideoBackground = ({ movieId }) => {
   const trailer = useSelector((store) => store.movies.nowPlayingTrailer);
-
   useNowPlayingMoviesTrailer(movieId);
 
   return (

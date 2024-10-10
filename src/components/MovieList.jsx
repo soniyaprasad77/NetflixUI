@@ -10,7 +10,7 @@ const MovieList = ({ movies, title }) => {
 
         {movies &&
           movies.map((movie) => {
-            console.log(movie);
+            // console.log(movie);
             return (
               <Link
                 key={movie.id}

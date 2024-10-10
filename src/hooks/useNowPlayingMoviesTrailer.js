@@ -1,13 +1,13 @@
-import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+// src/hooks/useNowPlayingMoviesTrailer.js
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { addNowPlayingMoviesTrailer } from "../store/movieSlice";
+import { API_OPTIONS } from "../utils/constants";
 
 const useNowPlayingMoviesTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const nowPlayingTrailer = useSelector(
-    (store) => store.movies.nowPlayingTrailer
-  );
+  const [trailer, setTrailer] = useState(null);
+
   useEffect(() => {
     const getVideoData = async () => {
       const response = await fetch(
@@ -21,10 +21,16 @@ const useNowPlayingMoviesTrailer = (movieId) => {
       const trailerVid = filteredData.length
         ? filteredData[0]
         : data.results[0];
+      setTrailer(trailerVid);
       dispatch(addNowPlayingMoviesTrailer(trailerVid));
     };
-    !nowPlayingTrailer && getVideoData();
+
+    if (movieId) {
+      getVideoData();
+    }
   }, [dispatch, movieId]);
+
+  return trailer;
 };
 
 export default useNowPlayingMoviesTrailer;
