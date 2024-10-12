@@ -9,7 +9,7 @@ import { LOGO } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { changeLanguage } from "../store/langSlice";
 import { useLocation } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -74,7 +74,6 @@ const Header = () => {
               className='p-2 bg-slate-600 text-white hidden md:block'
             >
               {SUPPORTED_LANGUAGES.map((lang) => {
-                //console.log(lang.identifier);
                 return (
                   <option key={lang.identifier} value={lang.identifier}>
                     {lang.name}
@@ -83,12 +82,13 @@ const Header = () => {
               })}
             </select>
           )}
-          <button
+          <Link
+            to={!isGeminiSearchTrue ? "/browse" : "/search"}
             onClick={handleGeminiSearchClick}
             className='bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg text-xs md:text-lg px-3 py-1 md:px-4 md:py-2 md:my-2 md:mr-4'
           >
-            {!isGeminiSearchTrue ? <span>Home</span> : <span> Search </span>}
-          </button>
+            {!isGeminiSearchTrue ? <span>Home</span> : <span>Search</span>}
+          </Link>
           <img
             className='w-12 h-12 hidden md:block'
             src={user?.photoURL}

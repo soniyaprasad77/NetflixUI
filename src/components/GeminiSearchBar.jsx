@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import langConst from "../utils/langConst";
 import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS, GEMINI_KEY } from "../utils/constants";
@@ -100,11 +100,10 @@ const GeminiSearchBar = () => {
           <button
             onClick={handleSearchButton}
             disabled={inputValue.length === 0}
-            className={`text-white bg-black px-4 py-2 rounded-full md:rounded-none mt-3 w-1/2 mx-auto md:mt-0 md:w-1/4 md:px-8 ${
-              inputValue.length === 0
-                ? "disabled:bg-[#cccccc] disabled:text-[#666666]"
-                : ""
-            }`}
+            className={`text-white bg-black px-4 py-2 rounded-full md:rounded-none mt-3 w-1/2 mx-auto md:mt-0 md:w-1/4 md:px-8 ${inputValue.length === 0
+              ? "disabled:bg-[#cccccc] disabled:text-[#666666]"
+              : ""
+              }`}
           >
             {loading ? "Loading..." : langConst[selectedLanguage]?.search}
           </button>

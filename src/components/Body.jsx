@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Browse from "./Browse";
 import Login from "./Login";
 import MovieDetails from "./MovieDetails";
+import GeminiSearchPage from "./GeminiSearchPage";
 
 const Body = () => {
   const movie = useSelector((store) => store.movies);
@@ -28,6 +29,10 @@ const Body = () => {
         },
       ],
     },
+    {
+      path: "/search",
+      element: <GeminiSearchPage />
+    }
   ]);
 
   return <RouterProvider router={appRouter} />;
