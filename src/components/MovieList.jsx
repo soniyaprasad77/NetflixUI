@@ -1,25 +1,45 @@
-import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
-const MovieList = ({ movies, title }) => {
-  return (
-    <div className="m-4 md:m-8 ">
-      <h1 className="text-lg md:text-3xl font-semibold mb-4 text-white">
-        {title}
-      </h1>
-      <div className="flex flex-col justify-center md:justify-start md:flex-row md:space-x-3 md:overflow-x-auto scrollbar-hide scrollbarHide">
+import MovieCard from "./MovieCard";
+import { useState, useEffect } from "react";
 
-        {movies &&
-          movies.map((movie) => {
-            // console.log(movie);
-            return (
-              <Link
-                key={movie.id}
-                to={`/browse/movie/${movie.id}`}>
-                <MovieCard image_path={movie.poster_path} />
-              </Link>
-            );
-          })
-        }
+const MovieList = ({ categoryTitle, movies }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [displayedMovies, setDisplayedMovies] = useState([]);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      setDisplayedMovies(movies?.slice(0, 4));
+    } else {
+      setDisplayedMovies(movies);
+    }
+  }, [isMobile, movies]);
+
+  return (
+    <div className=''>
+      <h1 className='px-4 text-xl md:text-3xl font-semibold mb-4 text-white'>
+        {categoryTitle}
+      </h1>
+
+      <div className='flex flex-col md:flex-row md:space-x-4 overflow-x-auto md:overflow-x-scroll scrollbar-hide'>
+        {displayedMovies &&
+          displayedMovies.map((movie) => (
+            <Link key={movie.id} to={`/browse/movie/${movie.id}`}>
+              <div className='mb-6 px-4 md:px-0 md:mb-0'>
+                <MovieCard movie={movie} />
+              </div>
+            </Link>
+          ))}
       </div>
     </div>
   );

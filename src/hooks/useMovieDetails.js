@@ -1,4 +1,3 @@
-// src/hooks/useMovieDetailsCallApi.js
 import { useEffect, useState } from "react";
 import { API_OPTIONS } from "../utils/constants";
 
@@ -12,7 +11,6 @@ const useMovieDetails = (movieId) => {
         API_OPTIONS
       );
       const data = await response.json();
-    //   console.log(data);
       setMovieDetails(data);
     };
 

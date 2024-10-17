@@ -1,22 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
-import { 
-  addNowPlayingMovies, 
-  addPopularMovies, 
-  addTopRatedMovies, 
-  addUpcomingMovies 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addNowPlayingMovies,
+  addPopularMovies,
+  addTopRatedMovies,
+  addUpcomingMovies,
 } from "../store/movieSlice";
+import { API_OPTIONS } from "../utils/constants";
 
 const useFetchMovies = () => {
   const dispatch = useDispatch();
-  
+
   // Selectors to fetch existing movie data from the store
-  const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies);
+  const nowPlayingMovies = useSelector(
+    (store) => store.movies.nowPlayingMovies
+  );
   const popularMovies = useSelector((store) => store.movies.popularMovies);
   const topRatedMovies = useSelector((store) => store.movies.topRatedMovies);
   const upcomingMovies = useSelector((store) => store.movies.upcomingMovies);
-  
+
   useEffect(() => {
     // Function to fetch all categories of movies
     const fetchMovies = async () => {
@@ -62,7 +64,13 @@ const useFetchMovies = () => {
     };
 
     fetchMovies();
-  }, [nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies, dispatch]);
+  }, [
+    nowPlayingMovies,
+    popularMovies,
+    topRatedMovies,
+    upcomingMovies,
+    dispatch,
+  ]);
 };
 
 export default useFetchMovies;

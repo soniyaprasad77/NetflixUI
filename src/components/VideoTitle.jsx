@@ -1,18 +1,25 @@
-const VideoTitle = ({ title, overview }) => {
+import { Play, Info } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const VideoTitle = ({ title, overview, movieId }) => {
   return (
-    <div className="w-screen aspect-video bg-gradient-to-r from-black text-white">
-      <div className="md:w-72 absolute top-16 left-8 md:top-40 md:left-12">
-        <h1 className="text-md md:text-4xl font-bold ">{title}</h1>
-        <h2 className="text-md mt-0 md:mt-6 hidden xl:block ">{overview}</h2>
-        <div className="flex md:gap-2 mt-0 md:mt-6">
-          <button className="bg-white w-18 text-xs px-3 py-2 md:text-lg md:py-4 whitespace-nowrap md:w-44 rounded-lg text-black">
-            {" "}
-            ▶ Play
+    <div className='w-screen aspect-video bg-gradient-to-r from-black text-white'>
+      <div className='md:w-96 absolute bottom-8 left-8 lg:bottom-24 lg:left-20'>
+        <h1 className='text-xl md:text-4xl font-black mb-2 md:mb-0'>{title}</h1>
+        <h2 className='text-md mt-0 md:mt-6 hidden md:block'>{overview}</h2>
+        <div className='flex md:gap-2 mt-0 md:mt-6'>
+          <button
+            type='button'
+            class='text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-1 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-xs md:text-sm px-2.5 py-1 md:px-5 md:py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2'
+          >
+            <Play className='mr-2' size={18} fill='black' /> Play
           </button>
-          <button className="shadow-md py-4 whitespace-nowrap w-44 rounded-lg hidden md:block">
-            {" "}
-            ℹ️ More Info
-          </button>
+          <Link
+            to={`/browse/movie/${movieId}`}
+            class='hidden md:block focus:ring-1 focus:outline-none focus:ring-gray-100 font-medium text-sm p-4 text-center items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2 rounded-full'
+          >
+            <Info size={20} />
+          </Link>
         </div>
       </div>
     </div>

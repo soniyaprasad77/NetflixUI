@@ -1,15 +1,13 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addUser, removeUser } from "../store/userSlice";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toggleGeminiSearchView } from "../store/geminiSlice";
-import { SUPPORTED_LANGUAGES } from "../utils/constants";
-import { LOGO } from "../utils/constants";
-import { auth } from "../utils/firebase";
 import { changeLanguage } from "../store/langSlice";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { addUser, removeUser } from "../store/userSlice";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import { auth } from "../utils/firebase";
+
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +33,6 @@ const Header = () => {
         if (location.pathname === "/") {
           navigate("/browse");
         }
-
       } else {
         dispatch(removeUser());
         navigate("/");
@@ -49,6 +46,9 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         navigate("/");
+
+        // Clear local storage
+        localStorage.clear();
       })
       .catch((error) => {
         navigate("/error");
@@ -64,8 +64,8 @@ const Header = () => {
   };
 
   return (
-    <div className='w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between'>
-      <img className=' w-20 md:w-36 z-10' src={LOGO} alt=' Logo' />
+    <div className='w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between bg-black md:bg-transparent'>
+      <img className='w-20 md:w-36 z-10' src={LOGO} alt=' Logo' />
       {user.email && (
         <div className='flex justify-between items-center gap-4'>
           {!isGeminiSearchTrue && (

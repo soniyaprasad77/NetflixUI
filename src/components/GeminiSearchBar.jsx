@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from "react";
-import langConst from "../utils/langConst";
-import { useDispatch, useSelector } from "react-redux";
-import { API_OPTIONS, GEMINI_KEY } from "../utils/constants";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addGeminiSuggestedMovies } from "../store/geminiSlice";
+import { API_OPTIONS, GEMINI_KEY } from "../utils/constants";
+import langConst from "../utils/langConst";
 import GeminiMovieSuggestions from "./GeminiMovieSuggestions";
 
 const genAI = new GoogleGenerativeAI(GEMINI_KEY);
@@ -86,13 +86,13 @@ const GeminiSearchBar = () => {
   return (
     <div>
       <form
-        className="my-24 w-full md:mx-auto md:w-1/2 border-black"
+        className='my-24 w-full md:mx-auto md:w-1/2 border-black'
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className="flex flex-col  md:flex-row my-4 md:gap-0 md:bg-black">
+        <div className='flex flex-col  md:flex-row my-4 md:gap-0 md:bg-black'>
           <input
-            type="text"
-            className="w-full p-4"
+            type='text'
+            className='w-full p-4'
             placeholder={langConst[selectedLanguage]?.searchPlaceholder}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
@@ -100,23 +100,24 @@ const GeminiSearchBar = () => {
           <button
             onClick={handleSearchButton}
             disabled={inputValue.length === 0}
-            className={`text-white bg-black px-4 py-2 rounded-full md:rounded-none mt-3 w-1/2 mx-auto md:mt-0 md:w-1/4 md:px-8 ${inputValue.length === 0
-              ? "disabled:bg-[#cccccc] disabled:text-[#666666]"
-              : ""
-              }`}
+            className={`text-white bg-black px-4 py-2 rounded-full md:rounded-none mt-3 w-1/2 mx-auto md:mt-0 md:w-1/4 md:px-8 ${
+              inputValue.length === 0
+                ? "disabled:bg-[#cccccc] disabled:text-[#666666]"
+                : ""
+            }`}
           >
             {loading ? "Loading..." : langConst[selectedLanguage]?.search}
           </button>
         </div>
       </form>
-      <div className="mt-4 bg-black w-1/2 mx-auto">
+      <div className='mt-4 bg-black w-1/2 mx-auto'>
         {errorMessage && (
-          <div className="text-red-500 mt-4">{errorMessage}</div>
+          <div className='text-red-500 mt-4'>{errorMessage}</div>
         )}
       </div>
-      <div className="w-full bg-[#0D3FA9] text-[#FFA900] bg-opacity-80">
+      <div className='w-full bg-[#0D3FA9] text-[#FFA900] bg-opacity-80'>
         {movies && (
-          <div className="text-white text-2xl md:text-3xl flex md:justify-center font-mono ">
+          <div className='text-white text-2xl md:text-3xl flex md:justify-center font-mono '>
             Recommended Movies
           </div>
         )}

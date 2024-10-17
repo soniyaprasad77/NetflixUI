@@ -1,17 +1,13 @@
-import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 // Pages
 import Browse from "./Browse";
 import Login from "./Login";
 import MovieDetails from "./MovieDetails";
 import GeminiSearchPage from "./GeminiSearchPage";
+import PrivateRoutes from "./PrivateRoutes";
 
-const Body = () => {
-  const movie = useSelector((store) => store.movies);
-  // console.log(movie);
-
+const RootApp = () => {
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -19,23 +15,29 @@ const Body = () => {
     },
     {
       path: "/browse",
-      element: <Browse />,
+      element: (
+        <PrivateRoutes>
+          <Browse />
+        </PrivateRoutes>
+      ),
       children: [
         {
           path: "/browse/movie/:movieId",
-          element: (
-            <MovieDetails />
-          ),
+          element: <MovieDetails />,
         },
       ],
     },
     {
       path: "/search",
-      element: <GeminiSearchPage />
-    }
+      element: (
+        <PrivateRoutes>
+          <GeminiSearchPage />
+        </PrivateRoutes>
+      ),
+    },
   ]);
 
   return <RouterProvider router={appRouter} />;
 };
 
-export default Body;
+export default RootApp;

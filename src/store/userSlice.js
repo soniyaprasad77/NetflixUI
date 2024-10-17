@@ -12,7 +12,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action) => {
-      //console.log(`inside addUser method: ${JSON.stringify(action.payload)}`);
       const { email, displayName, id, photoURL } = action.payload;
 
       state.email = email;

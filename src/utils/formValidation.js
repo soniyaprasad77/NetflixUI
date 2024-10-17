@@ -3,21 +3,27 @@ const formValidation = (email, password, name) => {
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
       email
     );
+
   const isPasswordValid =
     /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\S+$).{8,20}$/.test(
       password
     );
+
   const isNameValid = /^[a-zA-Z]{3,}$/.test(name);
-  if(!isEmailValid) {
-    return 'Invalid email';
+
+  if (!isNameValid) {
+    return "Please provide a valid name";
   }
-  if(!isPasswordValid) {
-    return 'Invalid password';
+
+  if (!isEmailValid) {
+    return "Please provide a valid email address";
   }
-  if(!isNameValid) {
-    return 'Invalid name';
+
+  if (!isPasswordValid) {
+    return "Please provide a valid password";
   }
 
   return null;
 };
+
 export default formValidation;
