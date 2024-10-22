@@ -33,7 +33,7 @@ const MovieDetails = () => {
       {/* Back Button */}
       <button
         className='bg-white text-black p-2 m-4 rounded-lg w-fit'
-        onClick={() => navigate("/browse")}
+        onClick={() => navigate("/")}
       >
         <ArrowLeft />
       </button>

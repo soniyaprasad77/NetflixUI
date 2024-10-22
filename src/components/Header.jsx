@@ -30,12 +30,12 @@ const Header = () => {
             photoURL: firebaseUser.photoURL,
           })
         );
-        if (location.pathname === "/") {
-          navigate("/browse");
+        if (location.pathname === "/login") {
+          navigate("/");
         }
       } else {
         dispatch(removeUser());
-        navigate("/");
+
       }
     });
 
@@ -66,42 +66,52 @@ const Header = () => {
   return (
     <div className='w-full absolute top-0 left-0 z-20 px-4 py-2 bg-gradient-to-b from-black flex justify-between bg-black md:bg-transparent'>
       <img className='w-20 md:w-36 z-10' src={LOGO} alt=' Logo' />
-      {user.email && (
-        <div className='flex justify-between items-center gap-4'>
-          {!isGeminiSearchTrue && (
-            <select
-              onClick={handleLanguageChange}
-              className='p-2 bg-slate-600 text-white hidden md:block'
-            >
-              {SUPPORTED_LANGUAGES.map((lang) => {
-                return (
-                  <option key={lang.identifier} value={lang.identifier}>
-                    {lang.name}
-                  </option>
-                );
-              })}
-            </select>
-          )}
+      <div className='flex justify-between items-center gap-4'>
+        {!isGeminiSearchTrue && (
+          <select
+            onClick={handleLanguageChange}
+            className='p-2 bg-slate-600 text-white hidden md:block'
+          >
+            {SUPPORTED_LANGUAGES.map((lang) => {
+              return (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              );
+            })}
+          </select>
+        )}
+        <Link
+          to={!isGeminiSearchTrue ? "/" : "/search"}
+          onClick={handleGeminiSearchClick}
+          className='bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg text-xs md:text-lg px-3 py-1 md:px-4 md:py-2 md:my-2 md:mr-4'
+        >
+          {!isGeminiSearchTrue ? <span>Home</span> : <span>Search</span>}
+        </Link>
+        {!user.email && (
           <Link
-            to={!isGeminiSearchTrue ? "/browse" : "/search"}
-            onClick={handleGeminiSearchClick}
+            to="/login"
             className='bg-[#0D3FA9] text-[#FFA900] font-bold rounded-lg text-xs md:text-lg px-3 py-1 md:px-4 md:py-2 md:my-2 md:mr-4'
           >
-            {!isGeminiSearchTrue ? <span>Home</span> : <span>Search</span>}
+            Login
           </Link>
-          <img
-            className='w-12 h-12 hidden md:block'
-            src={user?.photoURL}
-            alt='user icon'
-          />
-          <button
-            onClick={handleSignOut}
-            className=' text-xs md:text-lg font-bold rounded-lg text-white whitespace-nowrap'
-          >
-            Sign Out
-          </button>
-        </div>
-      )}
+        )}
+        {user.email && (
+          <>
+            <img
+              className='w-12 h-12 hidden md:block'
+              src={user?.photoURL}
+              alt='user icon'
+            />
+            <button
+              onClick={handleSignOut}
+              className=' text-xs md:text-lg font-bold rounded-lg text-white whitespace-nowrap'
+            >
+              Sign Out
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

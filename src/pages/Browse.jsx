@@ -17,7 +17,7 @@ const Browse = () => {
   return (
     <div className='relative'>
       <Header />
-      {location.pathname === "/browse" || location.pathname === "/browse/" ? (
+      {location.pathname === "/" ? (
         <>{geminiSearch ? <MainContainer /> : <GeminiSearchPage />}</>
       ) : (
         <Outlet />

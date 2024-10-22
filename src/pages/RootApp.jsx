@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Pages
 import Browse from "./Browse";
@@ -9,16 +9,11 @@ import PrivateRoutes from "./PrivateRoutes";
 
 const RootApp = () => {
   const appRouter = createBrowserRouter([
+
     {
       path: "/",
-      element: <Login />,
-    },
-    {
-      path: "/browse",
       element: (
-        <PrivateRoutes>
-          <Browse />
-        </PrivateRoutes>
+        <Browse />
       ),
       children: [
         {
@@ -30,11 +25,13 @@ const RootApp = () => {
     {
       path: "/search",
       element: (
-        <PrivateRoutes>
-          <GeminiSearchPage />
-        </PrivateRoutes>
+        <GeminiSearchPage />
       ),
     },
+    {
+      path: "/login",
+      element: <Login />
+    }
   ]);
 
   return <RouterProvider router={appRouter} />;
