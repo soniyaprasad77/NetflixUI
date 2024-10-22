@@ -9,7 +9,7 @@ const formValidation = (email, password, name) => {
       password
     );
 
-  const isNameValid = /^[a-zA-Z]{3,}$/.test(name);
+  const isNameValid = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/.test(name);
 
   if (!isNameValid) {
     return "Please provide a valid name";
